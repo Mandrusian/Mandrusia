@@ -9,14 +9,14 @@
     --color-text-dark: #86868B;
     --color-apple-blue: #007AFF;
     --color-apple-blue-hover: #0087FF;
-    --border-radius-hero: 28px; /* Larger radius for main sections */
-    --border-radius-card: 18px; /* Standard card radius */
-    --border-radius-button: 12px; /* Button radius */
+    --border-radius-hero: 28px;
+    --border-radius-card: 18px;
+    --border-radius-button: 12px;
     --shadow-light: rgba(0, 0, 0, 0.15);
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.5);
     --glass-effect-blur: 20px;
-    --glass-effect-bg: rgba(255, 255, 255, 0.08); /* Subtle transparency for glass elements */
+    --glass-effect-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
@@ -28,7 +28,7 @@ body {
     padding: 0;
     background-color: var(--color-dark-bg);
     color: var(--color-text-light);
-    font-size: 17px; /* Apple default font size */
+    font-size: 17px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@ body {
 /* Global Headings */
 h1, h2, h3, h4, h5, h6 {
     color: var(--color-text-light);
-    font-weight: 600; /* Semi-bold */
+    font-weight: 600;
     margin: 0;
     padding: 0;
 }
@@ -59,7 +59,7 @@ a:hover {
 
 /* Header (Top Navigation) */
 header {
-    background-color: rgba(29, 29, 31, 0.9); /* Dark, slightly transparent */
+    background-color: rgba(29, 29, 31, 0.9);
     backdrop-filter: blur(var(--glass-effect-blur));
     -webkit-backdrop-filter: blur(var(--glass-effect-blur));
     padding: 14px 0;
@@ -80,47 +80,47 @@ header {
 }
 
 .header-logo {
-    width: 28px; /* Smaller logo for header */
+    width: 28px;
     height: 28px;
-    border-radius: 6px; /* Squircle-like */
+    border-radius: 6px;
     margin-right: 10px;
     box-shadow: 0 1px 3px var(--shadow-light);
 }
 
 header h1 {
     font-size: 20px;
-    font-weight: 700; /* Bold */
+    font-weight: 700;
     display: flex;
     align-items: center;
 }
 
 header h1 a {
     color: var(--color-text-light);
-    text-shadow: none; /* No glow on main header text */
+    text-shadow: none;
 }
 
 header nav a {
     color: var(--color-text-light);
     font-size: 15px;
-    font-weight: 500; /* Medium weight */
+    font-weight: 500;
     padding: 8px 15px;
     border-radius: var(--border-radius-button);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--color-text-light);
 }
 
 /* Main Content Sections */
 .section {
-    min-height: 100vh; /* Full viewport height sections */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 80px 20px; /* Top/bottom padding for content */
+    padding: 80px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -135,49 +135,74 @@ header nav a:hover {
 }
 
 .section-content {
-    max-width: 980px; /* Apple-like content width */
+    max-width: 980px;
     width: 100%;
-    z-index: 2; /* Ensure content is above background images */
+    z-index: 2;
 }
 
 /* Hero Section (VSaturn) */
 #vsaturn-hero {
-    background-color: #000; /* Pure black background for hero */
+    background-color: #000;
     color: var(--color-text-light);
     position: relative;
+    overflow: hidden; /* Ensure image doesn't overflow */
 }
 
-#vsaturn-hero::before {
-    content: ;
+#vsaturn-hero .vsaturn-planet {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(./assets/images/vsaturn.jpg); /* Your VSaturn image */
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.6) blur(5px); /* Darken and slightly blur background image */
-    transform: scale(1.05); /* Slightly scale for blur effect */
+    width: 100%; /* Adjust as needed */
+    max-width: 800px; /* Max size for the planet image */
+    height: auto;
+    opacity: 0.8; /* Slightly transparent */
+    filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5)); /* Subtle blue glow */
     z-index: 1;
+    pointer-events: none; /* Allow clicks to pass through */
 }
 
-#vsaturn-hero .section-content {
+/* Positioning for the planet image */
+#vsaturn-hero .vsaturn-planet.top-left {
+    top: 5%;
+    left: 5%;
+    transform: translate(-5%, -5%) rotate(-15deg);
+    max-width: 400px;
+    opacity: 0.2;
+}
+#vsaturn-hero .vsaturn-planet.center-main {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(15deg);
+    max-width: 800px;
+    opacity: 0.8;
+}
+#vsaturn-hero .vsaturn-planet.bottom-right {
+    bottom: 5%;
+    right: 5%;
+    transform: translate(5%, 5%) rotate(30deg);
+    max-width: 300px;
+    opacity: 0.3;
+}
+
+
+#vsaturn-hero .hero-text-content {
+    position: relative; /* Ensure text is above planet */
+    z-index: 2;
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
 #vsaturn-hero h2 {
-    font-size: 56px; /* Large heading */
+    font-size: 56px;
     font-weight: 700;
     margin-bottom: 10px;
-    text-shadow: 0 0 15px rgba(0, 122, 255, 0.6); /* Subtle blue glow */
+    color: var(--color-text-light); /* Use light text color */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(0, 122, 255, 0.4); /* White glow with blue tint */
 }
 
 #vsaturn-hero p {
     font-size: 28px;
     color: var(--color-text-dark);
     margin-bottom: 30px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Subtle text shadow for readability */
 }
 
 .cta-buttons {
@@ -246,7 +271,7 @@ header nav a:hover {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Push content to top, links to bottom */
+    justify-content: space-between;
 }
 
 .project-card:hover {
@@ -267,7 +292,7 @@ header nav a:hover {
 }
 
 .project-card .card-links {
-    margin-top: auto; /* Push links to bottom */
+    margin-top: auto;
     display: flex;
     gap: 15px;
 }
