@@ -16,9 +16,8 @@
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.5);
     --glass-effect-blur: 20px;
-    --glass-effect-bg: rgba(255, 255, 255, 0.08); /* Subtle transparency for glass elements */
+    --glass-effect-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --hero-overlay-color: rgba(0, 0, 0, 0.5); /* Dark overlay for hero section */
 }
 
 /* Base Body Styling */
@@ -180,16 +179,16 @@ header nav a:hover {
     overflow: hidden;
 }
 
-/* Overlay for readability */
-#vsaturn-hero::before {
-    content: ;
+/* NEW: Overlay for readability */
+#vsaturn-hero .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--hero-overlay-color); /* Dark overlay */
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 1; /* Above planets, below text */
+    pointer-events: none;
 }
 
 #vsaturn-hero .vsaturn-planet {
@@ -201,6 +200,7 @@ header nav a:hover {
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
     z-index: 0; /* Behind the overlay */
     pointer-events: none;
+    /* Removed CSS transition for transform, as JS will control it */
 }
 
 /* Positioning for the planet image */
@@ -244,7 +244,7 @@ header nav a:hover {
 
 #vsaturn-hero p {
     font-size: 28px;
-    color: var(--color-text-light); /* Make body text lighter for readability */
+    color: var(--color-text-light);
     margin-bottom: 30px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
