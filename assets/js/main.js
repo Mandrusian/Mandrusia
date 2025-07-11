@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener("scroll", function() {
         const scrollY = window.scrollY;
-        const rotationDegree = scrollY * 0.15;
+        const rotationDegree = scrollY * 0.15; // Adjust this multiplier for faster/slower rotation
 
         planetElements.forEach(planet => {
             const currentTransform = window.getComputedStyle(planet).transform;
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentTranslateY = "0";
             let currentInitialRotation = 0;
 
+            // Extract initial translate values from CSS based on class
             if (planet.classList.contains("top-left")) {
                 currentTranslateX = "-5%";
                 currentTranslateY = "-5%";
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentTranslateY = "-50%";
             }
 
+            // Attempt to parse existing rotation from matrix (most robust) or direct rotate()
             const matrixMatch = currentTransform.match(/matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^)]+)\)/);
             if (matrixMatch) {
                 const a = parseFloat(matrixMatch[1]);
@@ -34,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             
+            // Apply new rotation incrementally to the initial rotation
+            // Use a smooth transition for the transform property
+            planet.style.transition = "transform 0.1s linear"; // Added for smoothness
             planet.style.transform = `translate(${currentTranslateX}, ${currentTranslateY}) rotate(${currentInitialRotation + rotationDegree}deg)`;
         });
     });
