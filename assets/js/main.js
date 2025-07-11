@@ -50,7 +50,10 @@ document.addEventListener("DOMContentLoaded", function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
+                // observer.unobserve(entry.target); // Keep observing if you want re-trigger on scroll back up
+            } else {
+                // Optional: remove class when not intersecting to reset animation
+                // entry.target.classList.remove("is-visible");
             }
         });
     }, observerOptions);
