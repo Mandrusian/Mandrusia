@@ -3,24 +3,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener("scroll", function() {
         const scrollY = window.scrollY;
-        const rotationDegree = scrollY * 0.15;
+        // Adjust the multiplier for faster/slower rotation. 0.15 is just a starting point.
+        const rotationDegree = scrollY * 0.15; 
 
         planetElements.forEach(planet => {
+            // Get the current transform string
             const currentTransform = window.getComputedStyle(planet).transform;
-            let initialRotation = 0;
+            let currentTranslateX = 0;
+            let currentTranslateY = 0;
+            let currentInitialRotation = 0; // This will be the base rotation from CSS
+
+            // Parse the initial transform property from the CSS
+            // For example: "translate(-5%, -5%) rotate(-15deg)"
+            const translateMatch = currentTransform.match(/translate\(([^,]+),([^)]+)\)/);
+            if (translateMatch) {
+                currentTranslateX = translateMatch[1];
+                currentTranslateY = translateMatch[2];
+            } else if (planet.classList.contains("center-main")) {
+                currentTranslateX = "-50%";
+                currentTranslateY = "-50%";
+            } else if (planet.classList.contains("top-left")) {
+                currentTranslateX = "-5%";
+                currentTranslateY = "-5%";
+            } else if (planet.classList.contains("bottom-right")) {
+                currentTranslateX = "5%";
+                currentTranslateY = "5%";
+            }
 
             const rotateMatch = currentTransform.match(/rotate\(([-]?\d+\.?\d*)deg\)/);
             if (rotateMatch && rotateMatch[1]) {
-                initialRotation = parseFloat(rotateMatch[1]);
+                currentInitialRotation = parseFloat(rotateMatch[1]);
             }
-
-            if (planet.classList.contains("top-left")) {
-                planet.style.transform = `translate(-5%, -5%) rotate(${initialRotation + rotationDegree}deg)`;
-            } else if (planet.classList.contains("bottom-right")) {
-                planet.style.transform = `translate(5%, 5%) rotate(${initialRotation + rotationDegree}deg)`;
-            } else if (planet.classList.contains("center-main")) {
-                planet.style.transform = `translate(-50%, -50%) rotate(${initialRotation + rotationDegree}deg)`;
-            }
+            
+            // Apply new rotation incrementally to the initial rotation
+            // The template literals allow us to combine the translate and new rotate values
+            planet.style.transform = `translate(${currentTranslateX}, ${currentTranslateY}) rotate(${currentInitialRotation + rotationDegree}deg)`;
         });
     });
 });
