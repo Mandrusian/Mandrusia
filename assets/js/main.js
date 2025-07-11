@@ -2,10 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const planetElements = document.querySelectorAll(".vsaturn-planet");
     const fadeInElements = document.querySelectorAll(".fade-in-on-scroll");
 
-    // Function to update planet rotation
     function updatePlanetRotation() {
         const scrollY = window.scrollY;
-        const rotationDegree = scrollY * 0.15; // Adjust this multiplier for faster/slower rotation
+        const rotationDegree = scrollY * 0.15;
 
         planetElements.forEach(planet => {
             const currentTransform = window.getComputedStyle(planet).transform;
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentTranslateY = "0";
             let currentInitialRotation = 0;
 
-            // Extract initial translate values from CSS based on class
             if (planet.classList.contains("top-left")) {
                 currentTranslateX = "-5%";
                 currentTranslateY = "-5%";
@@ -25,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentTranslateY = "-50%";
             }
 
-            // Attempt to parse existing rotation from matrix (most robust) or direct rotate()
             const matrixMatch = currentTransform.match(/matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^)]+)\)/);
             if (matrixMatch) {
                 const a = parseFloat(matrixMatch[1]);
@@ -38,25 +35,22 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             
-            // Apply new rotation incrementally to the initial rotation
-            // Use a smooth transition for the transform property
-            planet.style.transition = "transform 0.1s linear"; // Added for smoothness
+            planet.style.transition = "transform 0.1s linear";
             planet.style.transform = `translate(${currentTranslateX}, ${currentTranslateY}) rotate(${currentInitialRotation + rotationDegree}deg)`;
         });
     }
 
-    // Intersection Observer for fade-in effect
     const observerOptions = {
-        root: null, // viewport
+        root: null,
         rootMargin: "0px",
-        threshold: 0.1 // Trigger when 10% of item is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target); // Stop observing once visible
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -65,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(el);
     });
 
-    // Initial call and event listener for planet rotation
-    updatePlanetRotation(); // Set initial rotation
+    updatePlanetRotation();
     window.addEventListener("scroll", updatePlanetRotation);
 });
