@@ -9,16 +9,16 @@
     --color-text-dark: #86868B;
     --color-apple-blue: #007AFF;
     --color-apple-blue-hover: #0087FF;
-    --border-radius-hero: 28px; /* Larger radius for main sections */
-    --border-radius-card: 18px; /* Standard card radius */
-    --border-radius-button: 12px; /* Button radius */
+    --border-radius-hero: 28px;
+    --border-radius-card: 18px;
+    --border-radius-button: 12px;
     --shadow-light: rgba(0, 0, 0, 0.15);
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.5);
     --glass-effect-blur: 20px;
-    --glass-effect-bg: rgba(255, 255, 255, 0.08); /* Subtle transparency for glass elements */
+    --glass-effect-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --hero-overlay-color: rgba(0, 0, 0, 0.4); /* Dark overlay for hero section */
+    --hero-overlay-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Base Body Styling */
@@ -29,7 +29,7 @@ body {
     padding: 0;
     background-color: var(--color-dark-bg);
     color: var(--color-text-light);
-    font-size: 17px; /* Apple default font size */
+    font-size: 17px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@ body {
 /* Global Headings */
 h1, h2, h3, h4, h5, h6 {
     color: var(--color-text-light);
-    font-weight: 600; /* Semi-bold */
+    font-weight: 600;
     margin: 0;
     padding: 0;
 }
@@ -58,7 +58,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Liquid Glass Base Effect for Cards and Elements */
+/* Liquid Glass Base Effect */
 .liquid-glass-effect {
     background-color: var(--glass-effect-bg);
     border: 1px solid var(--glass-border);
@@ -89,7 +89,7 @@ a:hover {
     box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.7);
 }
 
-/* Header (Top Navigation) */
+/* Header Styling */
 header {
     background-color: rgba(29, 29, 31, 0.9);
     backdrop-filter: blur(var(--glass-effect-blur));
