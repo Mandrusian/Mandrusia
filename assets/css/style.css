@@ -16,8 +16,9 @@
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.5);
     --glass-effect-blur: 20px;
-    --glass-effect-bg: rgba(255, 255, 255, 0.08);
+    --glass-effect-bg: rgba(255, 255, 255, 0.08); /* Subtle transparency for glass elements */
     --glass-border: rgba(255, 255, 255, 0.1);
+    --hero-overlay-color: rgba(0, 0, 0, 0.5); /* Dark overlay for hero section */
 }
 
 /* Base Body Styling */
@@ -179,6 +180,18 @@ header nav a:hover {
     overflow: hidden;
 }
 
+/* Overlay for readability */
+#vsaturn-hero::before {
+    content: ;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--hero-overlay-color); /* Dark overlay */
+    z-index: 1;
+}
+
 #vsaturn-hero .vsaturn-planet {
     position: absolute;
     width: 100%;
@@ -186,7 +199,7 @@ header nav a:hover {
     height: auto;
     opacity: 0.8;
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
-    z-index: 1;
+    z-index: 0; /* Behind the overlay */
     pointer-events: none;
 }
 
@@ -216,7 +229,7 @@ header nav a:hover {
 
 #vsaturn-hero .hero-text-content {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Ensure text is above overlay and planet */
     padding-top: 100px;
     padding-bottom: 100px;
 }
@@ -231,7 +244,7 @@ header nav a:hover {
 
 #vsaturn-hero p {
     font-size: 28px;
-    color: var(--color-text-dark);
+    color: var(--color-text-light); /* Make body text lighter for readability */
     margin-bottom: 30px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
