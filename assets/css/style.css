@@ -2,25 +2,24 @@
 
 /* Variables for consistent styling */
 :root {
-    --color-dark-bg-start: #0A0A0F; /* Deeper dark for gradient start */
-    --color-dark-bg-end: #1A1A20;   /* Slightly lighter dark for gradient end */
-    --color-dark-surface: #1C1C1C;
-    --color-dark-card: #282828; /* This will be overridden by liquid-glass-effect for project cards */
+    --color-dark-bg: #1A1A1A;
+    --color-dark-surface: #2C2C2C;
+    --color-dark-card: #3A3A3A;
     --color-text-light: #F5F5F7;
     --color-text-dim: #A0A0A5;
     --color-text-muted: #6E6E73;
     --color-apple-blue: #007AFF;
     --color-apple-blue-hover: #0087FF;
-    --border-radius-hero: 48px;
-    --border-radius-card: 28px;
-    --border-radius-button: 9999px; /* Pill-shaped buttons */
-    --shadow-subtle: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.25);
-    --shadow-heavy: rgba(0, 0, 0, 0.4);
-    --glass-blur-amount: 35px;
-    --glass-bg-opacity: 0.06;
-    --glass-border-opacity: 0.12;
-    --text-glow-color: rgba(0, 122, 255, 0.6);
+    --border-radius-hero: 28px;
+    --border-radius-card: 18px;
+    --border-radius-button: 12px;
+    --shadow-light: rgba(0, 0, 0, 0.15);
+    --shadow-medium: rgba(0, 0, 0, 0.3);
+    --shadow-heavy: rgba(0, 0, 0, 0.5);
+    --glass-effect-blur: 20px;
+    --glass-effect-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --hero-overlay-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Base Body Styling */
@@ -29,7 +28,7 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, var(--color-dark-bg-start), var(--color-dark-bg-end)); /* Refined background gradient */
+    background-color: var(--color-dark-bg);
     color: var(--color-text-light);
     font-size: 17px;
     min-height: 100vh;
@@ -67,12 +66,12 @@ a:hover {
 
 /* Liquid Glass Base Effect for Cards and Elements */
 .liquid-glass-effect {
-    background-color: var(--glass-bg-opacity);
-    border: 1px solid var(--glass-border-opacity);
+    background-color: var(--glass-effect-bg);
+    border: 1px solid var(--glass-border);
     border-radius: var(--border-radius-hero);
     box-shadow: 0 8px 32px 0 var(--shadow-heavy);
-    backdrop-filter: blur(var(--glass-blur-amount));
-    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
+    backdrop-filter: blur(var(--glass-effect-blur));
+    -webkit-backdrop-filter: blur(var(--glass-effect-blur));
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
@@ -85,22 +84,22 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.08) 100%);
     z-index: -1;
     border-radius: inherit;
     pointer-events: none;
 }
 
 .liquid-glass-effect:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.7);
 }
 
 /* Header (Top Navigation) */
 header {
     background-color: rgba(29, 29, 31, 0.9);
-    backdrop-filter: blur(var(--glass-blur-amount));
-    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
+    backdrop-filter: blur(var(--glass-effect-blur));
+    -webkit-backdrop-filter: blur(var(--glass-effect-blur));
     padding: 14px 0;
     position: sticky;
     top: 0;
@@ -143,7 +142,7 @@ header nav a {
     font-size: 15px;
     font-weight: 500;
     padding: 8px 15px;
-    border-radius: var(--border-radius-button); /* Pill-shaped for nav items */
+    border-radius: var(--border-radius-button);
     transition: background-color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.2s ease-in-out;
 }
 
@@ -205,9 +204,7 @@ header nav a:hover {
 #vsaturn-hero .vsaturn-planet {
     position: absolute;
     width: 100%;
-    max-width: 800px;
     height: auto;
-    opacity: 0.8;
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
     z-index: 0;
     pointer-events: none;
@@ -220,6 +217,23 @@ header nav a:hover {
     transform: translate(-50%, -50%) rotate(15deg); /* Initial rotation, JS will update */
     max-width: 800px;
     opacity: 0.8;
+}
+/* Re-introducing and refining top-left/bottom-right for subtle depth */
+#vsaturn-hero .vsaturn-planet.top-left {
+    top: 10%;
+    left: 10%;
+    transform: translate(-10%, -10%) rotate(-30deg) scale(0.6); /* Smaller, more offset */
+    max-width: 300px;
+    opacity: 0.15; /* More subtle */
+    filter: blur(3px) drop-shadow(0 0 5px rgba(0, 122, 255, 0.3)); /* Blurred */
+}
+#vsaturn-hero .vsaturn-planet.bottom-right {
+    bottom: 10%;
+    right: 10%;
+    transform: translate(10%, 10%) rotate(45deg) scale(0.7); /* Smaller, more offset */
+    max-width: 350px;
+    opacity: 0.2; /* More subtle */
+    filter: blur(4px) drop-shadow(0 0 7px rgba(0, 122, 255, 0.4)); /* Blurred */
 }
 
 
@@ -314,11 +328,10 @@ header nav a:hover {
 }
 
 .project-card {
-    /* Apply liquid glass effect to project cards */
-    background-color: rgba(255, 255, 255, 0.06); /* Slightly more transparent than default glass-effect */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly more visible border */
-    border-radius: var(--border-radius-card); /* Specific card radius */
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.35); /* Softer shadow for cards */
+    background-color: rgba(255, 255, 255, 0.06); /* Use glass properties for project cards */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(var(--glass-blur-amount));
     -webkit-backdrop-filter: blur(var(--glass-blur-amount));
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -346,7 +359,7 @@ header nav a:hover {
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); /* More pronounced shadow on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 .project-card h3 {

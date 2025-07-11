@@ -12,29 +12,22 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentTranslateY = "0";
             let currentInitialRotation = 0;
 
+            // Determine initial transform based on class
             if (planet.classList.contains("top-left")) {
                 currentTranslateX = "-5%";
                 currentTranslateY = "-5%";
+                currentInitialRotation = -30; // Initial rotation for top-left
             } else if (planet.classList.contains("bottom-right")) {
                 currentTranslateX = "5%";
                 currentTranslateY = "5%";
+                currentInitialRotation = 45; // Initial rotation for bottom-right
             } else if (planet.classList.contains("center-main")) {
                 currentTranslateX = "-50%";
                 currentTranslateY = "-50%";
+                currentInitialRotation = 15; // Initial rotation for center-main
             }
 
-            const matrixMatch = currentTransform.match(/matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^)]+)\)/);
-            if (matrixMatch) {
-                const a = parseFloat(matrixMatch[1]);
-                const b = parseFloat(matrixMatch[2]);
-                currentInitialRotation = Math.atan2(b, a) * (180 / Math.PI);
-            } else {
-                const rotateMatch = currentTransform.match(/rotate\(([-]?\d+\.?\d*)deg\)/);
-                if (rotateMatch && rotateMatch[1]) {
-                    currentInitialRotation = parseFloat(rotateMatch[1]);
-                }
-            }
-            
+            // Apply new rotation relative to initial rotation
             planet.style.transition = "transform 0.1s linear";
             planet.style.transform = `translate(${currentTranslateX}, ${currentTranslateY}) rotate(${currentInitialRotation + rotationDegree}deg)`;
         });
