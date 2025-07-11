@@ -211,29 +211,22 @@ header nav a:hover {
 }
 
 /* Positioning for the planet image */
-#vsaturn-hero .vsaturn-planet.center-main {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(15deg); /* Initial rotation, JS will update */
-    max-width: 800px;
-    opacity: 0.8;
-}
-/* Re-introducing and refining top-left/bottom-right for subtle depth */
+/* Only top-left and bottom-right as subtle background elements */
 #vsaturn-hero .vsaturn-planet.top-left {
-    top: 10%;
+    top: 15%;
     left: 10%;
-    transform: translate(-10%, -10%) rotate(-30deg) scale(0.6); /* Smaller, more offset */
-    max-width: 300px;
-    opacity: 0.15; /* More subtle */
-    filter: blur(3px) drop-shadow(0 0 5px rgba(0, 122, 255, 0.3)); /* Blurred */
+    transform: translate(-10%, -10%) rotate(-30deg) scale(0.5);
+    max-width: 300px; /* Smaller size */
+    opacity: 0.15; /* Very subtle */
+    filter: blur(5px) drop-shadow(0 0 5px rgba(0, 122, 255, 0.3)); /* Blurred */
 }
 #vsaturn-hero .vsaturn-planet.bottom-right {
-    bottom: 10%;
+    bottom: 15%;
     right: 10%;
-    transform: translate(10%, 10%) rotate(45deg) scale(0.7); /* Smaller, more offset */
+    transform: translate(10%, 10%) rotate(45deg) scale(0.6);
     max-width: 350px;
-    opacity: 0.2; /* More subtle */
-    filter: blur(4px) drop-shadow(0 0 7px rgba(0, 122, 255, 0.4)); /* Blurred */
+    opacity: 0.2;
+    filter: blur(6px) drop-shadow(0 0 7px rgba(0, 122, 255, 0.4)); /* Blurred */
 }
 
 

@@ -12,22 +12,29 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentTranslateY = "0";
             let currentInitialRotation = 0;
 
-            // Determine initial transform based on class
             if (planet.classList.contains("top-left")) {
-                currentTranslateX = "-5%";
-                currentTranslateY = "-5%";
-                currentInitialRotation = -30; // Initial rotation for top-left
+                currentTranslateX = "15%"; /* Adjusted for top-left */
+                currentTranslateY = "10%"; /* Adjusted for top-left */
+                currentInitialRotation = -30;
             } else if (planet.classList.contains("bottom-right")) {
-                currentTranslateX = "5%";
-                currentTranslateY = "5%";
-                currentInitialRotation = 45; // Initial rotation for bottom-right
-            } else if (planet.classList.contains("center-main")) {
-                currentTranslateX = "-50%";
-                currentTranslateY = "-50%";
-                currentInitialRotation = 15; // Initial rotation for center-main
+                currentTranslateX = "-10%"; /* Adjusted for bottom-right */
+                currentTranslateY = "-15%"; /* Adjusted for bottom-right */
+                currentInitialRotation = 45;
             }
+            // No center-main planet in HTML, so no need to handle its specific translate here
 
-            // Apply new rotation relative to initial rotation
+            const matrixMatch = currentTransform.match(/matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^)]+)\)/);
+            if (matrixMatch) {
+                const a = parseFloat(matrixMatch[1]);
+                const b = parseFloat(matrixMatch[2]);
+                currentInitialRotation = Math.atan2(b, a) * (180 / Math.PI);
+            } else {
+                const rotateMatch = currentTransform.match(/rotate\(([-]?\d+\.?\d*)deg\)/);
+                if (rotateMatch && rotateMatch[1]) {
+                    currentInitialRotation = parseFloat(rotateMatch[1]);
+                }
+            }
+            
             planet.style.transition = "transform 0.1s linear";
             planet.style.transform = `translate(${currentTranslateX}, ${currentTranslateY}) rotate(${currentInitialRotation + rotationDegree}deg)`;
         });
