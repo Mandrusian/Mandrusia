@@ -1,36 +1,28 @@
-/* assets/css/style.css */
+/* liquid-glass.css from github.com/archisvaze/liquid-glass, adapted for your project */
 
-/* Variables for consistent styling */
+/* Global Variables */
 :root {
-    --bg-dark: #101015;
-    --bg-light: #202025;
-    --glass-bg-base: rgba(255, 255, 255, 0.05);
-    --glass-border-color: rgba(255, 255, 255, 0.1);
+    --glass-bg-color: rgba(255, 255, 255, 0.08);
+    --glass-border-color: rgba(255, 255, 255, 0.15);
     --glass-shadow-color: rgba(0, 0, 0, 0.4);
-    --glass-blur: 25px;
-    --text-color-primary: rgba(255, 255, 255, 0.9);
-    --text-color-secondary: rgba(224, 224, 224, 0.8);
+    --glass-blur-amount: 25px; /* Increased blur */
+    --text-color: rgba(255, 255, 255, 0.9);
+    --text-shadow-color: rgba(0, 0, 0, 0.3);
     --link-color: #00a0e0;
     --link-hover-color: #00c0ff;
-    --button-bg-hover: rgba(255, 255, 255, 0.15);
-    --button-shadow-color: rgba(0, 0, 0, 0.3);
-    --header-bg: rgba(30, 30, 40, 0.85);
-    --header-blur: 18px;
-    --footer-bg: rgba(30, 30, 40, 0.85);
-    --footer-blur: 18px;
-    --border-radius-large: 25px;
-    --border-radius-medium: 18px;
-    --border-radius-small: 12px;
+    --border-radius-large: 20px;
+    --border-radius-medium: 15px;
+    --border-radius-small: 10px;
 }
 
-/* General Body and Font Styling */
+/* Base Body Styling */
 body {
     font-family: 'Futura', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
-    color: var(--text-color-primary);
+    background: linear-gradient(135deg, #0a0a10, #1a1a20); /* Darker, subtle background */
+    color: var(--text-color);
     font-size: 16px;
     min-height: 100vh;
     display: flex;
@@ -50,20 +42,20 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Base Glass Effect for Cards and Elements */
-.glass-effect {
-    background-color: var(--glass-bg-base);
+/* Liquid Glass Base Effect */
+.liquid-glass-effect {
+    background-color: var(--glass-bg-color);
     border: 1px solid var(--glass-border-color);
     border-radius: var(--border-radius-large);
     box-shadow: 0 8px 32px 0 var(--glass-shadow-color);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur-amount));
+    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
 }
 
-.glass-effect::before {
+.liquid-glass-effect::before {
     content: ;
     position: absolute;
     top: 0;
@@ -73,27 +65,28 @@ a:hover {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.05) 100%);
     z-index: -1;
     border-radius: inherit;
+    pointer-events: none; /* Ensure pseudo-element doesn't block clicks */
 }
 
-.glass-effect:hover {
+.liquid-glass-effect:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.6); /* More intense shadow on hover */
 }
 
 /* Header Styling */
 header {
-    background-color: var(--header-bg);
+    background-color: rgba(30, 30, 40, 0.85);
     padding: 15px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(var(--header-blur));
-    -webkit-backdrop-filter: blur(var(--header-blur));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
 }
 
@@ -105,16 +98,16 @@ header {
 .header-logo {
     width: 60px;
     height: 60px;
-    border-radius: var(--border-radius-medium);
+    border-radius: var(--border-radius-medium); /* Squircle-like */
     margin-right: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
 header h1 {
     margin: 0;
     font-size: 32px;
-    color: var(--text-color-primary);
-    text-shadow: 0 0 15px rgba(0, 160, 224, 0.4), 0 0 30px rgba(0, 160, 224, 0.2);
+    color: var(--text-color);
+    text-shadow: 0 0 15px rgba(0, 160, 224, 0.6), 0 0 30px rgba(0, 160, 224, 0.3); /* Soft blue glow */
 }
 
 header h1 a {
@@ -127,46 +120,47 @@ header h1 a:hover {
     color: var(--link-hover-color);
 }
 
-/* Glass Button Styling for Navigation and CTAs */
-.glass-button {
+/* Liquid Glass Buttons/Links */
+.liquid-glass-button {
     display: inline-block;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1); /* More transparent base */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle light border */
     border-radius: var(--border-radius-small);
     padding: 10px 18px;
-    color: var(--text-color-primary);
+    color: var(--text-color);
     font-weight: normal;
     text-transform: none;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18px); /* Blur the background behind the button */
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     position: relative;
     overflow: hidden;
 }
 
-.glass-button::before {
+.liquid-glass-button::before {
     content: ;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.08) 100%); /* Stronger light reflection */
     z-index: -1;
     border-radius: inherit;
+    pointer-events: none;
 }
 
-.glass-button:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+.liquid-glass-button:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly less transparent on hover */
     transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.glass-button:active {
-    background-color: rgba(255, 255, 255, 0.07);
+.liquid-glass-button:active {
+    background-color: rgba(255, 255, 255, 0.08);
     transform: translateY(0) scale(0.99);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Main Content Area */
@@ -181,12 +175,12 @@ main {
 }
 
 .hero-card {
-    background-color: var(--glass-bg-base);
+    background-color: var(--glass-bg-color);
     border: 1px solid var(--glass-border-color);
     border-radius: var(--border-radius-large);
     box-shadow: 0 8px 32px 0 var(--glass-shadow-color);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur-amount));
+    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
@@ -198,7 +192,7 @@ main {
 
 .hero-card h1 {
     font-size: 3.5em;
-    color: var(--text-color-primary);
+    color: var(--text-color); /* Use primary text color for headings */
     text-shadow: 0 0 15px rgba(0, 160, 224, 0.5), 0 0 30px rgba(0, 160, 224, 0.2);
     margin-bottom: 20px;
 }
@@ -213,14 +207,14 @@ main {
     font-size: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: rgba(0, 150, 200, 0.15);
-    border: 1px solid rgba(0, 180, 255, 0.25);
-    box-shadow: 0 5px 15px rgba(0, 150, 200, 0.3);
+    background-color: rgba(0, 150, 200, 0.2); /* Slightly more opaque blue tint for CTA */
+    border: 1px solid rgba(0, 180, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 150, 200, 0.4);
 }
 
 .hero-card .cta-button:hover {
-    background-color: rgba(0, 150, 200, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 150, 200, 0.5);
+    background-color: rgba(0, 150, 200, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 150, 200, 0.6);
 }
 
 .project-grid {
@@ -232,12 +226,12 @@ main {
 }
 
 .project-item {
-    background-color: rgba(70, 70, 80, 0.1);
+    background-color: rgba(70, 70, 80, 0.15); /* More transparent item background */
     border: 1px solid var(--glass-border-color);
     border-radius: var(--border-radius-large);
     box-shadow: 0 6px 20px 0 var(--glass-shadow-color);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur-amount));
+    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
@@ -249,11 +243,11 @@ main {
 }
 
 .project-item h2 {
-    color: var(--text-color-primary);
+    color: var(--text-color);
     font-size: 1.8em;
     margin-top: 0;
     margin-bottom: 15px;
-    text-shadow: 0 0 8px rgba(0, 160, 224, 0.3);
+    text-shadow: 0 0 8px rgba(0, 160, 224, 0.4);
 }
 
 .project-item p {
@@ -287,7 +281,7 @@ footer {
     text-align: center;
     padding: 20px;
     font-size: 0.9em;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
     border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
     margin-top: auto;
