@@ -179,15 +179,15 @@ header nav a:hover {
     overflow: hidden;
 }
 
-/* NEW: Overlay for readability */
+/* Overlay for readability */
 #vsaturn-hero .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
-    z-index: 1; /* Above planets, below text */
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
     pointer-events: none;
 }
 
@@ -198,9 +198,8 @@ header nav a:hover {
     height: auto;
     opacity: 0.8;
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
-    z-index: 0; /* Behind the overlay */
+    z-index: 0;
     pointer-events: none;
-    /* Removed transition for transform, as JS will control it */
 }
 
 /* Positioning for the planet image */
