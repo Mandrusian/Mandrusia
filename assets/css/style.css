@@ -28,7 +28,9 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    background-color: var(--color-dark-bg);
+    background: radial-gradient(circle at top left, var(--color-dark-bg) 0%, #15151A 50%, var(--color-dark-bg) 100%); /* Subtle radial gradient */
+    background-size: 200% 200%; /* Larger background to allow movement */
+    animation: backgroundPan 30s linear infinite alternate; /* Slow, continuous pan animation */
     color: var(--color-text-light);
     font-size: 17px;
     min-height: 100vh;
@@ -37,6 +39,12 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* NEW: Background Pan Animation */
+@keyframes backgroundPan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
 /* Global Headings */
@@ -120,7 +128,7 @@ header {
 .header-logo {
     width: 28px;
     height: 28px;
-    border-radius: 6px; /* Squircle-like */
+    border-radius: 6px;
     margin-right: 10px;
     box-shadow: 0 1px 3px var(--shadow-subtle);
 }
@@ -184,7 +192,7 @@ header nav a:hover {
     color: var(--color-text-light);
     position: relative;
     overflow: hidden;
-    min-height: 80vh; /* Make it a bit shorter than full screen */
+    min-height: 80vh;
     padding-top: 150px;
     padding-bottom: 150px;
 }
@@ -213,12 +221,26 @@ header nav a:hover {
 }
 
 /* Positioning for the planet image */
-#vsaturn-hero .vsaturn-planet.center-main { /* Only one main planet now */
+#vsaturn-hero .vsaturn-planet.top-left {
+    top: 5%;
+    left: 5%;
+    transform: translate(-5%, -5%) rotate(-15deg);
+    max-width: 400px;
+    opacity: 0.2;
+}
+#vsaturn-hero .vsaturn-planet.center-main {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg); /* Initial rotation, JS will update */
+    transform: translate(-50%, -50%) rotate(15deg);
     max-width: 800px;
     opacity: 0.8;
+}
+#vsaturn-hero .vsaturn-planet.bottom-right {
+    bottom: 5%;
+    right: 5%;
+    transform: translate(5%, 5%) rotate(30deg);
+    max-width: 300px;
+    opacity: 0.3;
 }
 
 
@@ -361,8 +383,8 @@ header nav a:hover {
 /* Footer Styling */
 footer {
     background-color: rgba(29, 29, 31, 0.9);
-    backdrop-filter: blur(var(--glass-blur-amount));
-    -webkit-backdrop-filter: blur(var(--glass-blur-amount));
+    backdrop-filter: blur(var(--glass-effect-blur));
+    -webkit-backdrop-filter: blur(var(--glass-effect-blur));
     color: var(--color-text-muted);
     text-align: center;
     padding: 30px 20px;

@@ -57,10 +57,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }, observerOptions);
 
+    // Initial call and event listener for planet rotation
+    updatePlanetRotation();
+    window.addEventListener("scroll", updatePlanetRotation);
+
+    // Observe all elements with fade-in-on-scroll class
     fadeInElements.forEach(el => {
         observer.observe(el);
     });
-
-    updatePlanetRotation();
-    window.addEventListener("scroll", updatePlanetRotation);
 });
